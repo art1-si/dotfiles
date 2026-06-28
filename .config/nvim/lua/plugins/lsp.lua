@@ -174,14 +174,7 @@ return {
 
         -- Document colour (Nvim 0.12+ native API — replaces flutter-tools lsp.color)
         if client:supports_method("textDocument/documentColor") then
-          local aug = vim.api.nvim_create_augroup("lsp_doc_color_" .. bufnr, { clear = true })
-          vim.api.nvim_create_autocmd("BufEnter", {
-            group = aug, buffer = bufnr,
-            callback = function()
-              pcall(vim.lsp.document_color, bufnr)
-              vim.lsp.document_color.enable()
-            end,
-          })
+          pcall(vim.lsp.document_color.enable)
         end
       end
 

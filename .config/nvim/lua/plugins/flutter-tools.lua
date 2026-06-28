@@ -62,7 +62,9 @@ return {
         end,
       },
       lsp = {
-        color = { enabled = false }, -- handled by vim.lsp.document_color on Nvim 0.12+
+        -- color deliberately omitted — default is { enabled = false }, and
+        -- setting it triggers a deprecation warning on Nvim 0.12+.
+        -- Document colour is enabled via vim.lsp.document_color in lsp.lua.
         capabilities = nil,
         settings = {
           dart = {

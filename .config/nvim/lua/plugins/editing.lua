@@ -71,7 +71,7 @@ return {
   -- Honours VSCode `editor.autoClosingBrackets: never` / `editor.autoClosingQuotes: never`.
   {
     "windwp/nvim-autopairs",
-    event = "InsertEnter",
+    event = "VeryLazy",
     config = function()
       local npairs = require("nvim-autopairs")
       npairs.setup({
