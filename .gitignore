@@ -1,0 +1,17 @@
+# editor swap/backup
+*.swp
+*.swo
+*.swn
+.netrwhist
+
+# OS
+.DS_Store
+Thumbs.db
+
+# local tooling
+node_modules/
+tags
+.*,tmp
+
+# do NOT ignore lazy-lock.json — it pins plugin versions (committed intentionally)
+!lazy-lock.json
