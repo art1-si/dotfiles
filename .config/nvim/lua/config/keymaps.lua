@@ -68,3 +68,24 @@ map("n", "<C-Right>", "<Cmd>vertical resize +2<CR>", "Resize window wider")
 
 -- Disable Ex mode (Q) — VSCode users instinctively reach for Q for everything
 map("n", "Q", "<Nop>", "Disable Ex mode")
+
+-- Telescope-driven fuzzy finders (plugin loaded on first invocation via `cmd`).
+-- Mirrors VSCode Cmd+P / Cmd+Shift+F / Cmd+B / Cmd+Shift+P workflow.
+-- Some use <cmd> so they work even when telescope.lua isn't yet loaded (lazy.nvim autoloads on cmd).
+map("n", "<leader>ff", "<Cmd>Telescope find_files<CR>", "Find files (Cmd+P)")
+map("n", "<leader>fg", "<Cmd>Telescope live_grep<CR>", "Live grep (Cmd+Shift+F)")
+map("n", "<leader>fF", "<Cmd>Telescope find_files cwd=<C-r>=fnamemodify(expand('%'), ':h')<CR><CR>", "Find files in buffer dir")
+map("n", "<leader>fb", "<Cmd>Telescope buffers<CR>", "Find buffers")
+map("n", "<leader>fo", "<Cmd>Telescope oldfiles<CR>", "Recent files")
+map("n", "<leader>fh", "<Cmd>Telescope help_tags<CR>", "Help tags")
+map("n", "<leader>fk", "<Cmd>Telescope keymaps<CR>", "Keymaps")
+map("n", "<leader>fc", "<Cmd>Telescope command_history<CR>", "Command history")
+map("n", "<leader>fp", "<Cmd>Telescope commands<CR>", "Command palette (Cmd+Shift+P)")
+map("n", "<leader>fr", "<Cmd>Telescope resume<CR>", "Resume last picker")
+
+-- buffer-scoped fuzzy find (like VSCode Cmd+Shift+O symbol nav)
+map("n", "<leader>ss", "<Cmd>Telescope current_buffer_fuzzy_find<CR>", "Fuzzy find in buffer")
+map("n", "<leader>sw", "<Cmd>Telescope grep_string<CR>", "Grep word under cursor")
+map("n", "<leader>sj", "<Cmd>Telescope jumplist<CR>", "Jumplist")
+map("n", "<leader>sm", "<Cmd>Telescope marks<CR>", "Marks")
+map("n", "<leader>sr", "<Cmd>Spectre<CR>", "Project find/replace")

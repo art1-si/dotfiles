@@ -7,10 +7,10 @@ return {
     branch = "v3.x",
     cmd = "Neotree",
     keys = {
-      { "<leader>f", "<Cmd>Neotree toggle reveal<CR>", desc = "Toggle file explorer (reveal current)" },
-      { "<leader>fe", "<Cmd>Neotree toggle focus<CR>", desc = "Toggle file explorer" },
-      { "<leader>fb", "<Cmd>Neotree buffers toggle<CR>", desc = "Buffer list in explorer" },
-      { "<leader>fg", "<Cmd>Neotree git_status toggle<CR>", desc = "Git status in explorer" },
+      { "<leader>ef", "<Cmd>Neotree toggle reveal filesystem<CR>", desc = "Explorer: filesystem (reveal)" },
+      { "<leader>ee", "<Cmd>Neotree toggle focus filesystem<CR>", desc = "Explorer: toggle" },
+      { "<leader>eb", "<Cmd>Neotree buffers toggle<CR>", desc = "Explorer: buffers" },
+      { "<leader>eg", "<Cmd>Neotree git_status toggle<CR>", desc = "Explorer: git status" },
     },
     dependencies = {
       "nvim-lua/plenary.nvim",

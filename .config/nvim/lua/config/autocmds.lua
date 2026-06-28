@@ -35,6 +35,7 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.opt_local.tabstop = 2
     vim.opt_local.textwidth = 120 -- dart.lineLength: 120
     vim.opt_local.expandtab = true
+    vim.bo.commentstring = "// %s" -- dart uses // for line comments
   end,
 })
 
