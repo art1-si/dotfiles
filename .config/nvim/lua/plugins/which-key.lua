@@ -38,7 +38,7 @@ return {
       -- Preset group labels — keeps the <space> legend tidy.
       wk.add({
         { "<leader>b", group = "  Buffer" },
-        { "<leader>c", group = " 󰆧 Code/LSP" },
+        { "<leader>c", group = " 󰆧 Code" },
         { "<leader>d", group = " 󰃭 Debug" },
         { "<leader>f", group = " 󰈞 File/Find" },
         { "<leader>g", group = " 󰊢 Git" },
@@ -46,7 +46,7 @@ return {
         { "<leader>s", group = " 󰺕 Search" },
         { "<leader>t", group = " 󰆽 Toggle/Tool" },
         { "<leader>w", group = " 󱂬 Window" },
-        { "<leader>x", group = " 󰁨 Quickfix/Trouble" },
+        { "<leader>x", group = " 󰁨 Trouble/Quickfix" },
         { "<leader>h", group = " 󰑏 Help/Hunk (gitsigns)" },
         { "<leader>l", group = " 󰓹 LSP action" },
         { "<leader>r", group = " 󰑕 Refactor/Run" },
