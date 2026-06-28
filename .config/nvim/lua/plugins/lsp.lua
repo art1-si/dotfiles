@@ -122,7 +122,7 @@ return {
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
       "williamboman/mason-lspconfig.nvim",
-      "hrsh7th/cmp-nvim-lsp", -- for legacy capabilities if needed; harmless
+      -- cmp-nvim-lsp intentionally omitted — we use blink.cmp, not nvim-cmp
       "folke/neoconf.nvim",
     },
     config = function()
