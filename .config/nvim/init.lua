@@ -13,20 +13,6 @@ require("config.keymaps")
 require("config.autocmds")
 require("config.lazy")
 
--- Debug: log all messages for troubleshooting insert mode errors
-local msg_log = vim.fn.expand("~/.config/nvim/msg.log")
-vim.api.nvim_create_autocmd("MsgHistory", {
-  callback = function() end,
-})
-vim.api.nvim_create_autocmd("UIEnter", {
-  once = true,
-  callback = function()
-    vim.schedule(function()
-      os.remove(msg_log)
-    end)
-  end,
-})
-
 -- Set colorscheme ASAP so first painted frame matches our theme.
 -- catppuccin is lazy=false (loaded eagerly) in lua/plugins/theme.lua, so it's available here.
 pcall(vim.cmd.colorscheme, "catppuccin")

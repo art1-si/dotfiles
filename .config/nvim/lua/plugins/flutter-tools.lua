@@ -12,7 +12,14 @@ return {
       "nvim-neotest/nvim-nio",
     },
     opts = {
-      flutter_path = vim.fn.exepath("flutter"),
+      -- Resolve the real flutter binary via mise to avoid shim symlink issue.
+      -- fn.exepath returns the mise shim; fn.resolve follows shim -> /usr/bin/mise
+      -- which makes flutter-tools incorrectly derive SDK root as /usr.
+      flutter_path = (function()
+        local p = vim.fn.system("mise which flutter 2>/dev/null"):gsub("%s+", "")
+        if p == "" then return vim.fn.exepath("flutter") end
+        return p
+      end)(),
       fvm = false,
       widget_guides = { enabled = true, debug = false },
       closing_tags = { highlight = "Identifier", enabled = true },
