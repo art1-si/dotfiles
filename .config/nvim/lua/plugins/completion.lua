@@ -18,9 +18,9 @@ return {
     },
     opts = function()
       return {
+        snippets = { preset = "luasnip" },
         keymap = {
           preset = "default",
-          -- VSCode-like accept: <Tab> / <CR> confirm, <C-n>/<C-p> move, <C-e> abort
           ["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
           ["<C-e>"] = { "hide", "fallback" },
           ["<CR>"] = { "accept", "fallback" },
@@ -39,15 +39,13 @@ return {
         sources = {
           providers = {
             lsp = { name = "LSP", module = "blink.cmp.sources.lsp", enabled = true },
-            path = { name = "Path", module = "blink.cmp.sources.path", enabled = true, opts = { show_slash = false } },
-            luasnip = { name = "Snip", module = "blink.cmp.sources.luasnip", enabled = true },
+            path = { name = "Path", module = "blink.cmp.sources.path", enabled = true, opts = { trailing_slash = false } },
             buffer = { name = "Buf", module = "blink.cmp.sources.buffer", enabled = true, opts = { get_bufnrs = function() return vim.api.nvim_list_bufs() end } },
           },
-          default = { "lsp", "path", "luasnip", "buffer" },
+          default = { "lsp", "path", "buffer" },
           per_filetype = {
-            -- dart completion is heavy from LSP; keep buffer off
-            dart = { "lsp", "path", "luasnip" },
-            php = { "lsp", "path", "luasnip", "buffer" },
+            dart = { "lsp", "path" },
+            php = { "lsp", "path", "buffer" },
           },
         },
         completion = {

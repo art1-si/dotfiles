@@ -87,7 +87,7 @@ return {
             { modified },
           },
           lualine_x = {
-            { "diagnostics", sources = { "nvim_diagnostic_status" }, symbols = { error = "󰅚 ", warn = "󰀪 ", info = "󰋽 ", hint = "󰌶 " } },
+            { "diagnostics", sources = { "nvim_diagnostic" }, symbols = { error = "󰅚 ", warn = "󰀪 ", info = "󰋽 ", hint = "󰌶 " } },
             { "diff", symbols = { added = " ", modified = " ", removed = " " }, cond = conditions.hide_in_width },
             { file_loc, cond = conditions.hide_in_width },
           },

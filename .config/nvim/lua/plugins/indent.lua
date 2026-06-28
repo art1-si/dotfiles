@@ -5,7 +5,7 @@ return {
     "lukas-reineke/indent-blankline.nvim",
     event = { "BufReadPost", "BufNewFile" },
     main = "ibl",
-    dependencies = { "nvim-treesitter/nvim-treesitter", "catppuccin/nvim" },
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
     opts = function()
       local palette = require("catppuccin.palettes").get_palette("mocha")
 
@@ -27,11 +27,6 @@ return {
       for i, c in ipairs(rainbow) do
         vim.api.nvim_set_hl(0, ("IblRainbow%d"):format(i), { fg = c, nocombine = true })
       end
-
-      local hooks = require("ibl.hooks")
-      hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
-        -- pre-create the highlight groups used by ibl via `scope` track.
-      end)
 
       return {
         indent = {
@@ -68,8 +63,8 @@ return {
         "IblRainbow4", "IblRainbow5", "IblRainbow6",
       }
       require("ibl").setup(opts)
-      hooks.register(hooks.type.SCOPE_HIGHLIGHT, function()
-        -- scope is single-colour (lavender); handled via opts.scope.highlight
+      hooks.register(hooks.type.SCOPE_HIGHLIGHT, function(_, _, _, scope_index)
+        return scope_index
       end)
     end,
   },

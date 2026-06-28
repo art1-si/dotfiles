@@ -49,24 +49,6 @@ return {
     },
   },
 
-  -- fidget.nvim: LSP progress spinner in the corner (quiet, no logs everywhere)
-  {
-    "j-hui/fidget.nvim",
-    event = "VeryLazy",
-    opts = {
-      notification = {
-        window = {
-          winblend = 0, border = "none",
-          normal_hl = "Normal", name = "Fidget",
-        },
-        override_vim_notify = true,
-      },
-      progress = {
-        display = { done_ttl = 1, done_icon = "✓", spinner = { "⣾","⣽","⣻","⢿","⡿","⣟","⣯","⣷" }, format_message = function(msg) return msg end },
-      },
-    },
-  },
-
   -- Error lens-like inline diagnostics. Uses built-in `vim.diagnostic.config` virtual
   -- text already set in lsp.lua; we just enable a cleaner visual stack here.
   -- `chrisgrieser/nvim-errorlist-lens` would be an alternative; using virtual text keeps things minimal.

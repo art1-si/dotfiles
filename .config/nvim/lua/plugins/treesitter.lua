@@ -55,6 +55,11 @@ return {
     config = function(_, opts)
       require("nvim-treesitter").setup(opts)
 
+      -- nvim-treesitter's queries live in runtime/queries/ but lazy.nvim only
+      -- adds the plugin root to &rtp (not the runtime/ subdirectory). Add it so
+      -- vim.treesitter.query.get() finds queries for non-bundled langs (dart, php, …).
+      vim.opt.rtp:append(vim.fn.stdpath("data") .. "/lazy/nvim-treesitter/runtime")
+
       -- Install missing parsers on first launch (synchronous-best-effort), then enable
       -- highlighting + indent on every TS-aware buffer.
       local function enable_ts_for_buf(bufnr)

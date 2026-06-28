@@ -1,16 +1,22 @@
--- Debug: log vim.notify + messages on InsertLeave
-local _dbg = vim.fn.expand("~/.config/nvim/debug.log")
-os.remove(_dbg)
-local _orig = vim.notify
-vim.notify = function(msg, ...)
-  local f = io.open(_dbg, "a"); if f then f:write(os.date("%H:%M:%S") .. " " .. tostring(msg) .. "\n"); f:close() end
-  return _orig(msg, ...)
+-- Error log: captures errors to ~/.config/nvim/error.log.
+-- Includes vim.notify ERROR/WARN + dump of :messages on VimLeavePre.
+local _errlog = vim.fn.expand("~/.config/nvim/error.log")
+if vim.fn.argc(-1) == 0 then
+  local f = io.open(_errlog, "w"); if f then f:write("--- session " .. os.date("%Y-%m-%d %H:%M:%S") .. " ---\n"); f:close() end
 end
-vim.api.nvim_create_autocmd("InsertLeave", {
+local _orig_notify = vim.notify
+vim.notify = function(msg, level, ...)
+  if type(msg) ~= "string" then msg = vim.inspect(msg) end
+  if level == vim.log.levels.ERROR or level == vim.log.levels.WARN then
+    local f = io.open(_errlog, "a"); if f then f:write(os.date("%H:%M:%S") .. " [notify] " .. msg .. "\n"); f:close() end
+  end
+  return _orig_notify(msg, level, ...)
+end
+vim.api.nvim_create_autocmd("VimLeavePre", {
   callback = function()
-    local f = io.open(_dbg, "a")
+    local f = io.open(_errlog, "a")
     if f then
-      f:write("--- msgs ---\n" .. vim.fn.execute("messages") .. "\n---\n")
+      f:write("--- messages ---\n" .. vim.fn.execute("messages") .. "\n---\n")
       f:close()
     end
   end,
