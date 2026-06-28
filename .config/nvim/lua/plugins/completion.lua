@@ -6,7 +6,12 @@ return {
   {
     "saghen/blink.cmp",
     lazy = false,
-    version = "*", -- use stable tagged release
+    -- Using main branch for fixes after v1.10.2:
+    --   - assert context exists when drawing ghost text
+    --   - do not show documentation if no item provided
+    --   - list.get_selected_item should not fallback to first item
+    -- (no breaking changes since v1.10.2)
+    branch = "main",
     dependencies = {
       "rafamadriz/friendly-snippets",
       "L3MON4D3/LuaSnip", -- snippet engine behind blink's snippet source

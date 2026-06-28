@@ -1,6 +1,32 @@
 -- Autocommands for the core editor. Plugin-related autocommands live in lua/plugins/*.
 local aug = vim.api.nvim_create_augroup("user", { clear = true })
 
+-- Debug: capture messages after insert mode to help diagnose blink/lsp errors
+vim.api.nvim_create_autocmd("InsertLeave", {
+  group = aug,
+  callback = function()
+    local logfile = vim.fn.expand("~/.config/nvim/insert_errors.log")
+    local msgs = vim.api.nvim_exec2("messages", { output = true }).output
+    if msgs and msgs ~= "" then
+      local lines = vim.split(msgs, "\n")
+      local errs = {}
+      for _, l in ipairs(lines) do
+        if l:find("^E%d*:") or l:find("error") or l:find("Error") then
+          table.insert(errs, l)
+        end
+      end
+      if #errs > 0 then
+        local f = io.open(logfile, "a")
+        if f then
+          f:write(os.date("%H:%M:%S") .. "\n")
+          for _, e in ipairs(errs) do f:write("  " .. e .. "\n") end
+          f:close()
+        end
+      end
+    end
+  end,
+})
+
 -- Briefly highlight on yank
 vim.api.nvim_create_autocmd("TextYankPost", {
   group = aug,
