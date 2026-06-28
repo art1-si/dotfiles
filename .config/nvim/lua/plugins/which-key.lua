@@ -45,9 +45,10 @@ return {
         { "<leader>x", group = " 󰁨 Trouble/Quickfix" },
         { "<leader>h", group = " 󰑏 Help/Hunk (gitsigns)" },
         { "<leader>l", group = " 󰓹 LSP action" },
-        { "<leader>r", group = " 󰑕 Refactor/Run" },
+        { "<leader>r", group = " 󰑕 Flutter run/reload" },
         { "<leader>e", group = " 󰈙 Explorer" },
-        { "<leader>n", group = " 󰀬 Notes" },
+        { "<leader>n", group = " 󰣖 Flutter device" },
+        { "<leader>a", group = " 󰐊 Flutter attach" },
         { "<leader>1", group = " Buffers [1..9] jump" },
       })
     end,

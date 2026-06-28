@@ -24,21 +24,9 @@ M.servers = {
     },
   },
 
-  -- Dart/Flutter
-  dartls = {
-    settings = {
-      dart = {
-        lineLength = 120, -- matches dart.lineLength
-        suggestSnippets = true,
-        updateImportsOnRename = true,
-        renameFilesWithClasses = "prompt", -- matches dart.renameFilesWithClasses
-        analyzeAngularTemplates = true,
-        enableSnippets = true,
-        showTodos = true, -- matches dart.showTodos
-        -- debugExternalPackageLibraries handled in dap.lua phase 5
-      },
-    },
-  },
+  -- Dart/Flutter: managed by flutter-tools.nvim (see flutter-tools.lua)
+  -- Settings passed through flutter-tools lsp config to preserve
+  -- lineLength=120, renameFilesWithClasses="prompt", etc.
 
   -- Lua for editing this very config
   lua_ls = {
@@ -181,6 +169,18 @@ return {
           vim.api.nvim_create_autocmd({ "CursorMoved", "BufLeave" }, {
             group = aug, buffer = bufnr,
             callback = vim.lsp.buf.clear_references,
+          })
+        end
+
+        -- Document colour (Nvim 0.12+ native API — replaces flutter-tools lsp.color)
+        if client:supports_method("textDocument/documentColor") then
+          local aug = vim.api.nvim_create_augroup("lsp_doc_color_" .. bufnr, { clear = true })
+          vim.api.nvim_create_autocmd("BufEnter", {
+            group = aug, buffer = bufnr,
+            callback = function()
+              pcall(vim.lsp.document_color, bufnr)
+              vim.lsp.document_color.enable()
+            end,
           })
         end
       end

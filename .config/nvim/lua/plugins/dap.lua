@@ -76,20 +76,7 @@ return {
 
       -- Adapters ---------------------------------------------------------------------
 
-      -- Dart / Flutter: dart-debug-adapter (aka "dart debug adapter" MS-vintage)
-      -- Mason installs it as `dart-debug-adapter` (executable shim).
-      local dart_bin = mason_bin("dart-debug-adapter")
-      if dart_bin then
-        dap.adapters.dart = {
-          type = "executable",
-          command = dart_bin,
-          args = { "flutter" },
-          -- flutter adapter runs on port 43500 by default
-          options = { detached = false },
-        }
-        -- Some adapter scripts use the "flutter debugger" entry directly. Provide both names.
-        dap.adapters.flutter = dap.adapters.dart
-      end
+      -- Dart / Flutter: handled by flutter-tools.nvim (see flutter-tools.lua)
 
       -- PHP / Xdebug: php-debug-adapter (installed via mason above)
       local php_bin = mason_bin("php-debug-adapter")
@@ -104,31 +91,7 @@ return {
       -- Configurations ----------------------------------------------------------------
       -- Per-language. They only apply when the matching filetype is active.
 
-      dap.configurations.dart = {
-        {
-          type = "dart",
-          request = "launch",
-          name = "Launch Flutter (debug)",
-          -- dart.debugExternalPackageLibraries: true (VSCode setting)
-          -- is honored by the adapter via name; here we request a no- Observatory
-          -- session by default. vim.fn.getcwd is the project root.
-          cwd = "${workspaceFolder}",
-          program = "${workspaceFolder}/lib/main.dart",
-          args = {},
-          toolRetryDelayms = 200,
-        },
-        {
-          type = "dart",
-          request = "attach",
-          name = "Attach to running Flutter",
-          cwd = "${workspaceFolder}",
-          -- matches VSCode flutter.attach
-          vmServiceUri = function()
-            return vim.fn.input("VM Service URI: ")
-          end,
-          toolRetryDelayms = 200,
-        },
-      }
+      -- Dart configurations are managed by flutter-tools.nvim (see flutter-tools.lua)
 
       dap.configurations.php = {
         {
