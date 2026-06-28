@@ -67,11 +67,15 @@ return {
             },
           },
           documentation = {
-            enabled = true,
             auto_show = true,
             auto_show_delay_ms = 200,
-            border = "rounded",
-            winhighlight = "Normal:BlinkCmpDoc,FloatBorder:FloatBorder",
+            update_delay_ms = 50,
+            treesitter_highlighting = true,
+            window = {
+              border = "rounded",
+              winhighlight = "Normal:BlinkCmpDoc,FloatBorder:BlinkCmpDocBorder,EndOfBuffer:BlinkCmpDoc",
+              scrollbar = true,
+            },
           },
           ghost_text = { enabled = false },
         }

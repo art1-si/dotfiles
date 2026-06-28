@@ -26,10 +26,6 @@ return {
         colors = false,
       },
       show_keys = true,
-      -- Disable in these contexts
-      filter = function(m)
-        return (m.is_description and m.desc ~= "") or m.keys:match("^" .. vim.g.mapleader)
-      end,
     },
     config = function(_, opts)
       local wk = require("which-key")
