@@ -36,7 +36,11 @@ return {
         group = aug,
         callback = function(args)
           if vim.bo[args.buf].buftype == "" and vim.bo[args.buf].filetype ~= "" then
-            lint.try_lint(args.buf)
+            -- Switch to that buffer (so lsp + lint both see current ft)
+            local prev = vim.api.nvim_get_current_buf()
+            vim.api.nvim_set_current_buf(args.buf)
+            lint.try_lint()
+            vim.api.nvim_set_current_buf(prev)
           end
         end,
       })

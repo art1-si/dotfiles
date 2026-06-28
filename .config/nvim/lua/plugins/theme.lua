@@ -54,7 +54,6 @@ return {
         treesitter_context = true,
         which_key = true,
         barbar = false,
-        bufferline = true,
         dap = true,
         dap_ui = true,
         rainbow_delimiters = true,

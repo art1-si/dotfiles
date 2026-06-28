@@ -17,8 +17,9 @@ vim.api.nvim_create_autocmd("BufReadPost", {
   pattern = "*",
   callback = function(args)
     local mark = vim.api.nvim_buf_get_mark(args.buf, '"')
-    if mark[1] > 1 and mark[1] <= vim.api.nvim_buf_line_count(args.buf) then
-      vim.api.nvim_set_cursor(0, { mark[1], mark[2] })
+    local lcount = vim.api.nvim_buf_line_count(args.buf)
+    if mark and mark[1] > 1 and mark[1] <= lcount then
+      vim.api.nvim_win_set_cursor(0, { mark[1], math.max(0, mark[2]) })
     end
   end,
   desc = "Restore cursor position",

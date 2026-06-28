@@ -31,7 +31,7 @@ map("n", "<leader>wv", "<C-w>v", "Split window vertical")
 map("n", "<leader>ws", "<C-w>s", "Split window horizontal")
 map("n", "<leader>wc", "<Cmd>close<CR>", "Close current window")
 
--- Buffers (until bufferline lands in phase 2):cycle/numbers
+-- Buffers (no tabs — just cycle / delete / find)
 map("n", "<S-Tab>", "<Cmd>bprevious<CR>", "Previous buffer")
 map("n", "<Tab>", "<Cmd>bnext<CR>", "Next buffer")
 map("n", "<leader>bd", "<Cmd>bdelete<CR>", "Delete buffer")
