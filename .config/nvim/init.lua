@@ -1,3 +1,21 @@
+-- Debug: log vim.notify + messages on InsertLeave
+local _dbg = vim.fn.expand("~/.config/nvim/debug.log")
+os.remove(_dbg)
+local _orig = vim.notify
+vim.notify = function(msg, ...)
+  local f = io.open(_dbg, "a"); if f then f:write(os.date("%H:%M:%S") .. " " .. tostring(msg) .. "\n"); f:close() end
+  return _orig(msg, ...)
+end
+vim.api.nvim_create_autocmd("InsertLeave", {
+  callback = function()
+    local f = io.open(_dbg, "a")
+    if f then
+      f:write("--- msgs ---\n" .. vim.fn.execute("messages") .. "\n---\n")
+      f:close()
+    end
+  end,
+})
+
 -- Entry point. Keep this minimal — everything else is modular under lua/config and lua/plugins.
 
 -- Ensure mise tool shims (flutter, dart, php, node, etc.) are in PATH
